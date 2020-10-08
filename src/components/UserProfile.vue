@@ -6,33 +6,15 @@
 			<div v-if="user.isAdmin" class="user-profile__admin-badge">Admin</div>
 
 			<div class="user-followers-count"><strong>Followers: </strong> {{ followers }}</div>
-
-			<form class="user-profile__create-twaat" @submit.prevent="createNewTwaat">
-				<label for="newTwaat"><strong>New Twaat</strong></label>
-				<textarea id="newTwaat" rows="4" v-model="newTwaatContent"></textarea>
-
-				<div class="user-profile__create-twaat-type">
-					<label for="newTwaatType"><strong>Type: </strong></label>
-					<select id="newTwaatType" v-model="selectedTwaatType">
-						<option :value="option.value" v-for="(option, index) in twaatTypes" :key="index">
-							{{ option.name }}
-						</option>
-					</select>
-				</div>
-
-				<button>
-					Twaat!
-				</button>
-			</form>
 		</div>
 
-		<div class="user-profile__twaats-wrapper">
-			<TwaatItem
-				class="user-profile__twaat"
-				v-for="twaat in user.twaats"
-				:key="twaat.id"
+		<div class="user-profile__twoots-wrapper">
+			<TwootItem
+				class="user-profile__twoot"
+				v-for="twoot in user.twoots"
+				:key="twoot.id"
 				:username="user.username"
-				:twaat="twaat"
+				:twoot="twoot"
 				@favourite="toggleFavourite"
 			/>
 		</div>
@@ -40,17 +22,18 @@
 </template>
 
 <script>
-import TwaatItem from '../components/TwaatItem';
+import TwootItem from '../components/TwootItem';
+import CreateTwootPanel from '../components/CreateTwootPanel';
 
 export default {
 	name: 'UserProfile',
 	components: {
-		TwaatItem,
+		twootItem,
 	},
 
 	data: () => ({
-		newTwaatContent: '',
-		selectedTwaatType: 'instant',
+		newtwootContent: '',
+		selectedtwootType: 'instant',
 		followers: 0,
 		user: {
 			id: 1,
@@ -59,7 +42,7 @@ export default {
 			lastName: 'Zero',
 			email: 'subzero@mk.com',
 			isAdmin: true,
-			twaats: [
+			twoots: [
 				{
 					id: 1,
 					content: 'Mortal Kombat',
@@ -70,14 +53,14 @@ export default {
 				},
 			],
 		},
-		twaatTypes: [
+		twootTypes: [
 			{
 				value: 'draft',
 				name: 'Draft',
 			},
 			{
 				value: 'instant',
-				name: 'Instant Twaat',
+				name: 'Instant twoot',
 			},
 		],
 	}),
@@ -98,16 +81,16 @@ export default {
 			this.followers++;
 		},
 		toggleFavourite(id) {
-			console.log(`New favourite twaat with id ${id}`);
+			console.log(`New favourite twoot with id ${id}`);
 		},
-		createNewTwaat() {
-			if (this.newTwaatContent && this.selectedTwaatType !== 'draft') {
-				this.user.twaats.unshift({
-					id: this.user.twaats.length + 1,
-					content: this.newTwaatContent,
+		createNewtwoot() {
+			if (this.newtwootContent && this.selectedtwootType !== 'draft') {
+				this.user.twoots.unshift({
+					id: this.user.twoots.length + 1,
+					content: this.newtwootContent,
 				});
 
-				this.newTwaatContent = '';
+				this.newtwootContent = '';
 			}
 		},
 	},
@@ -148,12 +131,12 @@ h1 {
 	margin: 0;
 }
 
-.user-profile__twaats-wrapper {
+.user-profile__twoots-wrapper {
 	display: grid;
 	gap: 10px;
 }
 
-.user-profile__create-twaat {
+.user-profile__create-twoot {
 	display: flex;
 	flex-direction: column;
 	padding-top: 20px;

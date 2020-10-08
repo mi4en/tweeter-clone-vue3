@@ -1,28 +1,28 @@
 <template>
-	<div class="twaat-item" @click="favouriteTwaat(twaat.id)">
-		<div class="user-profile__twaat">
-			<div class="twaat-item__user">@{{ username }}</div>
-			<div class="twaat-item__content">{{ twaat.content }}</div>
+	<div class="twoot-item" @click="favouritetwoot(twoot.id)">
+		<div class="user-profile__twoot">
+			<div class="twoot-item__user">@{{ username }}</div>
+			<div class="twoot-item__content">{{ twoot.content }}</div>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'TwaatItem',
+	name: 'twootItem',
 
 	props: {
 		username: {
 			type: String,
 			required: true,
 		},
-		twaat: {
+		twoot: {
 			type: Object,
 			required: true,
 		},
 	},
 	methods: {
-		favouriteTwaat(id) {
+		favouritetwoot(id) {
 			this.$emit('favourite', id);
 		},
 	},
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.twaat-item {
+.twoot-item {
 	width: 80%;
 	padding: 20px;
 	background-color: #fff;
@@ -40,11 +40,11 @@ export default {
 	transition: all 0.25s ease;
 }
 
-.twaat-item:hover {
+.twoot-item:hover {
 	transform: scale(1.1, 1.1);
 }
 
-.twaat-item__user {
+.twoot-item__user {
 	font-weight: bold;
 }
 </style>
