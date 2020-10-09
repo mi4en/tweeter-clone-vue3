@@ -2,9 +2,9 @@
 	><form
 		class="create-twoot-panel"
 		@submit.prevent="createNewTwoot"
-		:class="{ '--exceeded': newTwootCharacterCount > 180 }"
+		:class="{ '--exceeded': newTwootCharacterCount > 120 }"
 	>
-		<label for="newTwoot"><strong>New Twoot</strong> ({{ newTwootCharacterCount }}/180)</label>
+		<label for="newTwoot"><strong>New Twoot</strong> ({{ newTwootCharacterCount }}/120)</label>
 		<textarea id="newTwoot" rows="4" v-model="state.newTwootContent" />
 
 		<div class="create-twoot-panel__submit">
