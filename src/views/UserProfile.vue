@@ -13,6 +13,9 @@
 		<div class="user-profile__twoots-wrapper">
 			<TwootItem v-for="twoot in state.user.twoots" :key="twoot.id" :username="state.user.username" :twoot="twoot" />
 		</div>
+		<router-link class="admin-btn" to="/admin">
+			Admin Panel
+		</router-link>
 	</div>
 </template>
 
@@ -81,6 +84,14 @@ export default {
 		display: grid;
 		grid-gap: 10px;
 		margin-bottom: auto;
+	}
+
+	.admin-btn {
+		background: rebeccapurple;
+		color: #fff;
+		padding: 10px;
+		border-radius: 5px;
+		text-align: center;
 	}
 }
 </style>

@@ -43,7 +43,7 @@ export default {
 		const newTwootCharacterCount = computed(() => state.newTwootContent.length);
 
 		function createNewTwoot() {
-			if (state.newTwootContent && state.selectedTwootType !== 'draft') {
+			if (state.newTwootContent && newTwootCharacterCount.value < 121 && state.selectedTwootType !== 'draft') {
 				ctx.emit('add-twoot', state.newTwootContent);
 				state.newTwootContent = '';
 			}
