@@ -1,25 +1,36 @@
 <template>
-	<nav>
-		<router-link to="/">
-			<div class="navigation__logo">
-				Twotter
+	<div id="app">
+		<nav>
+			<router-link to="/">
+				<div class="navigation__logo">
+					Twotter
+				</div>
+			</router-link>
+			<div class="navigation__user" v-if="user">
+				{{ user.username }}
 			</div>
-		</router-link>
-		<!-- <div class="navigation__user" v-if="user">
-			{{ user.username }}
-		</div> -->
-	</nav>
-	<UserProfile />
+		</nav>
+		<router-view />
+	</div>
 </template>
 
 <script>
-import UserProfile from './components/UserProfile';
-
+import { useStore } from 'vuex';
+import { onMounted, computed } from 'vue';
+import { users } from './assets/users';
 export default {
 	name: 'App',
+	setup() {
+		onMounted(async () => {
+			await store.dispatch('User/setUser', users[0]);
+		});
 
-	components: {
-		UserProfile,
+		const store = useStore();
+
+		const user = computed(() => store.state.User.user);
+		return {
+			user,
+		};
 	},
 };
 </script>
@@ -30,8 +41,8 @@ nav {
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px 5%;
-	background-color: deeppink;
-	color: white;
+	background-color: steelblue;
+	color: #fff;
 	.navigation__logo {
 		font-weight: bold;
 		font-size: 24px;
